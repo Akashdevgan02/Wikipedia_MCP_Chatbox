@@ -1,0 +1,14 @@
+{
+  "name": "wikipedia-mcp-server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Wikipedia MCP server exposing search_wikipedia and get_article_summary tools",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.0"
+  }
+}
