@@ -1,0 +1,12 @@
+{
+  "name": "wikipedia-mcp-chat",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "npm start --prefix backend",
+    "postinstall": "npm install --prefix backend && npm install --prefix mcp"
+  }
+}
