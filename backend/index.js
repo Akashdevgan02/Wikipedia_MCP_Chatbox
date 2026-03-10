@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
@@ -7,6 +8,7 @@ import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js"
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const MCP_INDEX = join(__dirname, "../mcp/index.js");
+const FRONTEND_DIST = join(__dirname, "../frontend/dist");
 
 let mcpClient = null;
 
@@ -57,6 +59,10 @@ function getSearchQuery(message) {
 const app = express();
 app.use(cors({ origin: ["http://localhost:5173", "http://127.0.0.1:5173"] }));
 app.use(express.json());
+
+if (existsSync(FRONTEND_DIST)) {
+  app.use(express.static(FRONTEND_DIST));
+}
 
 app.post("/api/chat", async (req, res) => {
   const message = req.body?.message;
@@ -127,6 +133,12 @@ app.post("/api/chat", async (req, res) => {
     res.status(500).json({ error: err.message || "Server error" });
   }
 });
+
+if (existsSync(FRONTEND_DIST)) {
+  app.get("*", (req, res) => {
+    res.sendFile(join(FRONTEND_DIST, "index.html"));
+  });
+}
 
 const PORT = Number(process.env.PORT) || 3001;
 const server = app.listen(PORT, () => {

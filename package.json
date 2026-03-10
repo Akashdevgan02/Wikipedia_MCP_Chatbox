@@ -7,6 +7,7 @@
   },
   "scripts": {
     "start": "npm start --prefix backend",
-    "postinstall": "npm install --prefix backend && npm install --prefix mcp"
+    "postinstall": "npm install --prefix backend && npm install --prefix mcp && npm install --prefix frontend",
+    "build": "npm run build --prefix frontend"
   }
 }
