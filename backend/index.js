@@ -37,6 +37,7 @@ const QUESTION_PREFIXES = [
   "what is ",
   "what's ",
   "who is ",
+  "who was ",
   "who's ",
   "define ",
   "tell me about ",
